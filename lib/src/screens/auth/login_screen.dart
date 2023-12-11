@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     width: double.infinity,
                     child: Text(
-                      'Inicio de sesión (72245215)',
+                      'Inicio de sesión',
                       style: styleText,
                     ),
                   ),
@@ -97,8 +97,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               isDense: true,
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12.0)),
-                              labelText: 'Cédula de ciudadanía',
-                              hintText: 'Ingrese el número de su cédula'),
+                              labelText: 'Usuario',
+                              hintText: 'Ingrese usuario'),
                           onFieldSubmitted: (value) {
                             _cedulaFocus.unfocus();
                             FocusScope.of(context).requestFocus(_passFocus);
@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           validator: (valor) {
                             if (valor!.isEmpty) {
-                              return 'Ingrese su número de cédula.';
+                              return 'Ingrese su nombre de usuario.';
                             }
                             return null;
                           },
