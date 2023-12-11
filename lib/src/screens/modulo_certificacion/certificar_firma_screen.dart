@@ -123,11 +123,11 @@ class _CertificarFirmaScreenState extends State<CertificarFirmaScreen> {
                                     BarcodeWidget(
                                       data: sipostProvider.barcode,
                                       barcode: Barcode.code128(),
-                                      height: 30.0,
+                                      height: 80.0,
                                       width: MediaQuery.of(context).size.width *
-                                          0.5,
+                                          0.8,
                                       drawText: true,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontFamily: "",
                                           height: 2.0,
                                           letterSpacing: 2.0,

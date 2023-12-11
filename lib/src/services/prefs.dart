@@ -29,8 +29,16 @@ class PreferenciasUsuario {
     return _prefs.getString('cedulaMensajero') ?? "72245215";
   }
 
+  get usuarioSipost {
+    return _prefs.getString('usuarioSipost') ?? "72245215";
+  }
+
   set cedulaMensajero(dynamic value) {
     _prefs.setString('cedulaMensajero', value);
+  }
+
+  set usuarioSipost(dynamic value) {
+    _prefs.setString('usuarioSipost', value);
   }
 
   get logged {

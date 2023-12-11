@@ -78,7 +78,8 @@ class _MenuScreenState extends State<MenuScreen> {
           _updated = false;
         });
       }
-    });
+    }
+    );
   }
 
   @override

@@ -104,9 +104,9 @@ class _CertificarScreenState extends State<CertificarScreen> {
                                   BarcodeWidget(
                                     data: sipostProvider.barcode,
                                     barcode: Barcode.code128(),
-                                    height: 30.0,
+                                    height: 80.0,
                                     width:
-                                        MediaQuery.of(context).size.width * 0.5,
+                                        MediaQuery.of(context).size.width * 0.8,
                                     drawText: true,
                                     style: const TextStyle(
                                         fontFamily: "",
@@ -375,10 +375,10 @@ class _CertificarScreenState extends State<CertificarScreen> {
                   sipostProvider.sipostResponse.names!,
                   _observacionesController.text,
                   DateTime.now().toLocal(),
-                  _prefs.cedulaMensajero,
-                  _prefs.cedulaMensajero,
-                  _prefs.cedulaMensajero,
-                  _prefs.cedulaMensajero)
+                  _prefs.usuarioSipost,
+                  _prefs.usuarioSipost,
+                  _prefs.usuarioSipost,
+                  _prefs.usuarioSipost)
               .then((resp) async {
             _scanService.cancel();
             if (resp['Message'] == 'Exitoso') {

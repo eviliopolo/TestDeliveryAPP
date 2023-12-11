@@ -55,8 +55,8 @@ class _ResultMailAmericasScreenState extends State<ResultMailAmericasScreen> {
                             BarcodeWidget(
                               data: _guiaDataSipost.barcode,
                               barcode: Barcode.code128(),
-                              height: 50.0,
-                              width: MediaQuery.of(context).size.width * 0.5,
+                              height: 80.0,
+                              width: MediaQuery.of(context).size.width * 0.8,
                               drawText: true,
                               style: TextStyle(
                                   fontFamily: "",

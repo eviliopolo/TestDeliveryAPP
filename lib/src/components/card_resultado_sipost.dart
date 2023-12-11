@@ -2,6 +2,7 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:prueba_de_entrega/src/components/modals.dart';
+import 'package:prueba_de_entrega/src/models/guide.dart';
 import 'package:prueba_de_entrega/src/models/sipost_response.dart';
 import 'package:prueba_de_entrega/src/provider/data_sipost_provider.dart';
 import 'package:prueba_de_entrega/src/services/consulta_service.dart';
@@ -13,12 +14,14 @@ class CardResultadoSipost extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   CardResultadoSipost(this.guiaBarcode);
 
+
   @override
   Widget build(BuildContext context) {
     SipostResponse? _sipostResponse =
         Provider.of<DataSipostProvider>(context, listen: false).sipostResponse;
     final _consultaService = ConsultaService();
     final _prefs = PreferenciasUsuario();
+    
 
     return Card(
       elevation: 0.0,
@@ -38,8 +41,8 @@ class CardResultadoSipost extends StatelessWidget {
                     BarcodeWidget(
                       data: guiaBarcode,
                       barcode: Barcode.code128(),
-                      height: 30.0,
-                      width: MediaQuery.of(context).size.width * 0.5,
+                      height: 80.0,
+                      width: MediaQuery.of(context).size.width * 0.8,
                       drawText: true,
                       style: const TextStyle(
                           fontFamily: "",
@@ -265,7 +268,8 @@ class CardResultadoSipost extends StatelessWidget {
                               _sipostResponse.isEntregaTercero!,
                           child: Container(
                             width: double.infinity,
-                            child: MaterialButton(
+                            child: MaterialButton(                             
+
                               color: blue,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0)),
@@ -274,12 +278,54 @@ class CardResultadoSipost extends StatelessWidget {
                                 style: TextStyle(color: white),
                               ),
                               onPressed: () {
-                                if (_sipostResponse.isFirma!) {
-                                  Navigator.pushNamed(
-                                      context, "certificar_firma");
-                                } else {
-                                  Navigator.pushNamed(context, "certificar");
-                                }
+
+                                _consultaService.searchGuideSipost(guiaBarcode).then((guiaSipost)
+                                  {
+                                    //Codigo para consultar si la guia ya fue digitalizada o esta en un cargue
+                                      if (guiaSipost != null && guiaSipost.availableForDelivery &&  !guiaSipost.delivered  )
+                                      {
+                                        if (_sipostResponse.isFirma!) {
+                                          Navigator.pushNamed(
+                                          context, "certificar_firma");
+                                        } 
+                                        else {
+                                          Navigator.pushNamed(context, "certificar");
+                                        }      
+                                      }
+                                      else
+                                      {
+                                        if (guiaSipost == null){
+                                          guideNotFound(context);
+                                        }
+                                        else if (guiaSipost.delivered){
+                                          imgDigitalized (context);
+                                        }
+                                        else if (!guiaSipost.availableForDelivery){
+                                          loadPostmanNotFound(context);
+                                        }
+                                        else{
+                                          guideNotFound(context);
+                                        }
+                                          
+                                      }
+
+                                      // if (1 == 1){
+                                      //   imgDigitalized (context);
+                                      // }
+                                      // else if (_sipostResponse.isFirma!) {
+                                      //     Navigator.pushNamed(
+                                      //     context, "certificar_firma");
+                                      // } 
+                                      // else {
+                                      //     Navigator.pushNamed(context, "certificar");
+                                      // }       
+                                  }
+                                );
+
+                                
+                                
+
+                                                         
                               },
                             ),
                           ),
@@ -296,4 +342,80 @@ class CardResultadoSipost extends StatelessWidget {
       ),
     );
   }
+
+  imgDigitalized (BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text(
+          'Guía ya digitalizada',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        content: const Text(
+            'Lo sentimos, esta guía ya se encuentra digitalizada.'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('ENTENDIDO'),
+            onPressed: () {
+              Navigator.popAndPushNamed(context, 'menu');
+            },
+          )
+        ],
+      );
+    },
+  );
 }
+
+  guideNotFound (BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            'Guía no encontrada',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          content: const Text(
+              'Lo sentimos, se produjo un error en el sistema, vuelva a intentarlo'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('ENTENDIDO'),
+              onPressed: () {
+                Navigator.popAndPushNamed(context, 'menu');
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  loadPostmanNotFound (BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            'Cargue a sector de distribucion',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          content: const Text(
+              'Lo sentimos, esta guía no se encuentra en un cargue a sector de distribución.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('ENTENDIDO'),
+              onPressed: () {
+                Navigator.popAndPushNamed(context, 'menu');
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
+}
+
+
+

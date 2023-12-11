@@ -102,13 +102,13 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
                                         _sipostProvider.barcode),
                                   );
                                 } else {
-                                  return Center(
+                                  return const Center(
                                     child: SingleChildScrollView(
                                       padding: EdgeInsets.all(30.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: <Widget>[
-                                          const Text(
+                                          Text(
                                             "Aviso",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
@@ -116,7 +116,7 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
                                                 fontFamily: "Custom"),
                                           ),
                                           Text(
-                                            sipostResponse.message!,
+                                            'Guía no valida',
                                             textAlign: TextAlign.center,
                                           ),
                                         ],
@@ -165,8 +165,9 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
                     selected: true,
                     title: Form(
                       child: TextFormField(
+                        autofocus: true,
                         textCapitalization: TextCapitalization.characters,
-                        style: TextStyle(fontSize: 14.0),
+                        style: const TextStyle(fontSize: 14.0),
                         controller: _guiaController,
                         focusNode: _guiaFocus,
                         decoration: InputDecoration(
@@ -187,34 +188,36 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
                                 : null),
                         onChanged: (valor) async {
                           if (valor.length == 13) {
-                            _isPorteria = await showDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: Text(
-                                    //"¿Entrega en Portería?",
-                                    "¿Desea continuar?",
-                                    style: TextStyle(fontFamily: "Bold"),
-                                  ),
-                                  content: Text("Seleccione una opción"),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text("SI"),
-                                      onPressed: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: Text("NO"),
-                                      onPressed: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                            _isPorteria = true;
+                            
+                            // await showDialog(
+                            //   context: context,
+                            //   barrierDismissible: false,
+                            //   builder: (context) {
+                            //     return AlertDialog(
+                            //       title: const Text(
+                            //         //"¿Entrega en Portería?",
+                            //         "4-72",
+                            //         style: TextStyle(fontFamily: "Bold"),
+                            //       ),
+                            //       content: const Text("Iniciar proceso de entrega"),
+                            //       actions: <Widget>[
+                            //         TextButton(
+                            //           child: const Text("Aceptar"),
+                            //           onPressed: () {
+                            //             Navigator.pop(context, true);
+                            //           },
+                            //         ),
+                            //         // TextButton(
+                            //         //   child: Text("NO"),
+                            //         //   onPressed: () {
+                            //         //     Navigator.pop(context, true);
+                            //         //   },
+                            //         // ),
+                            //       ],
+                            //     );
+                            //   },
+                            // );
                             setState(() => _sipostProvider.barcode = valor);
                           }
                         },
@@ -226,34 +229,35 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
                       ),
                       onPressed: () async {
                         await _scanService.scanBarcode();
-                        _isPorteria = await showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text(
-                                //"¿Entrega en Portería?",
-                                "¿Desea continuar?",
-                                style: TextStyle(fontFamily: "Bold"),
-                              ),
-                              content: Text("Seleccione una opción"),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: Text("SI"),
-                                  onPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                ),
-                                TextButton(
-                                  child: Text("NO"),
-                                  onPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                        _isPorteria = true;
+                        // _isPorteria = await showDialog(
+                        //   context: context,
+                        //   barrierDismissible: false,
+                        //   builder: (context) {
+                        //     return AlertDialog(
+                        //       title: Text(
+                        //         //"¿Entrega en Portería?",
+                        //         "¿Desea continuar?",
+                        //         style: TextStyle(fontFamily: "Bold"),
+                        //       ),
+                        //       content: Text("Seleccione una opción"),
+                        //       actions: <Widget>[
+                        //         TextButton(
+                        //           child: Text("SI"),
+                        //           onPressed: () {
+                        //             Navigator.pop(context, true);
+                        //           },
+                        //         ),
+                        //         TextButton(
+                        //           child: Text("NO"),
+                        //           onPressed: () {
+                        //             Navigator.pop(context, true);
+                        //           },
+                        //         ),
+                        //       ],
+                        //     );
+                        //   },
+                        // );
                         _sipostProvider.barcode = _scanService.scanResult;
                         _guiaController.text = _scanService.scanResult;
                         setState(() {});

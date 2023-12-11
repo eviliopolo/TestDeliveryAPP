@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         TextFormField(
                           //initialValue: '72245215',
                           focusNode: _cedulaFocus,
-                          keyboardType: TextInputType.number,
+                          // keyboardType: TextInputType.number,
                           textInputAction: TextInputAction.next,
                           decoration: InputDecoration(
                               isDense: true,
@@ -120,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           //initialValue: '72245215',
                           focusNode: _passFocus,
                           obscureText: true,
-                          keyboardType: TextInputType.number,
+                          // keyboardType: TextInputType.number,
                           textInputAction: TextInputAction.done,
                           decoration: InputDecoration(
                               isDense: true,
@@ -168,12 +168,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                       .login(_cedulaController.text,
                                           _passController.text)
                                       .then((resp) {
-                                    if (resp['Message'] == 'Exitoso') {
+                                    if (resp['token'] != null) {
                                       setState(() {
                                         _cargando = false;
                                         _prefs.cedulaMensajero =
-                                            _cedulaController.text;
+                                            '72245215';
                                         _prefs.logged = true;
+                                        _prefs.usuarioSipost = _cedulaController.text;
                                       });
                                       Navigator.pushReplacementNamed(
                                           context, 'menu');
