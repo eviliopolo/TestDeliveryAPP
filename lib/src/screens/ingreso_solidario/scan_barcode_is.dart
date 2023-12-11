@@ -42,7 +42,7 @@ class _ScanBarcodeISScreenState extends State<ScanBarcodeISScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Wrap(
+        title: const Wrap(
           direction: Axis.vertical,
           children: <Widget>[
             Text(
@@ -59,24 +59,24 @@ class _ScanBarcodeISScreenState extends State<ScanBarcodeISScreen> {
       body: Stack(
         children: <Widget>[
           Container(
-            constraints: BoxConstraints.expand(),
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            constraints: const BoxConstraints.expand(),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             color: background,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Container(
                     width: double.infinity,
-                    child: Text(
+                    child: const Text(
                       'Escanea la guía',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   Column(
                     children: <Widget>[
                       TextFormField(
