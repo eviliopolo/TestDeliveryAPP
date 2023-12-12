@@ -21,8 +21,25 @@ class AuthService {
           'Password': password,
         },
         headers: headers);
-    final decodedData = json.decode(resp.body);
-    return decodedData;
+
+        print ('Response.Status ${resp.statusCode} ');
+        print (' Response.Body ${resp.body} ');
+
+        switch(resp.statusCode){
+          case 200:
+            final decodedData = json.decode(resp.body);
+            return decodedData;
+          case 400:
+            return null;
+          case 401:
+            return null;
+          default: 
+            return null;
+        }
+
+
+    // final decodedData = json.decode(resp.body);
+    // return decodedData;
 
     // final uri = Uri.https(urlSipost, 'api/Loginsipost');
     // final resp = await http.post(uri,
