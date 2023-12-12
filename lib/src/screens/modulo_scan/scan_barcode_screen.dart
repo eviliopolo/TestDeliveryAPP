@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:prueba_de_entrega/src/theme/theme.dart';
+import 'package:LIQYAPP/src/theme/theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-import 'package:prueba_de_entrega/src/components/modals.dart';
-//import 'package:prueba_de_entrega/src/models/data_sipost_model.dart';
+import 'package:LIQYAPP/src/components/modals.dart';
+//import 'package:LIQYAPP/src/models/data_sipost_model.dart';
 import 'package:provider/provider.dart';
-import 'package:prueba_de_entrega/src/provider/data_sipost_provider.dart';
-import 'package:prueba_de_entrega/src/services/consulta_service.dart';
-import 'package:prueba_de_entrega/src/services/prefs.dart';
-import 'package:prueba_de_entrega/src/services/scanner_service.dart';
+import 'package:LIQYAPP/src/provider/data_sipost_provider.dart';
+import 'package:LIQYAPP/src/services/consulta_service.dart';
+import 'package:LIQYAPP/src/services/prefs.dart';
+import 'package:LIQYAPP/src/services/scanner_service.dart';
 
 class ScanBarcodeScreen extends StatefulWidget {
   @override

@@ -3,12 +3,12 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'package:flutter/material.dart';
 //import 'package:provider/provider.dart';
-import 'package:prueba_de_entrega/src/components/connection_overlay.dart';
-import 'package:prueba_de_entrega/src/components/loading_overlay.dart';
-import 'package:prueba_de_entrega/src/components/modals.dart';
-import 'package:prueba_de_entrega/src/services/auth_service.dart';
-import 'package:prueba_de_entrega/src/services/prefs.dart';
-import 'package:prueba_de_entrega/src/theme/theme.dart';
+import 'package:LIQYAPP/src/components/connection_overlay.dart';
+import 'package:LIQYAPP/src/components/loading_overlay.dart';
+import 'package:LIQYAPP/src/components/modals.dart';
+import 'package:LIQYAPP/src/services/auth_service.dart';
+import 'package:LIQYAPP/src/services/prefs.dart';
+import 'package:LIQYAPP/src/theme/theme.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -171,10 +171,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     if (resp['token'] != null) {
                                       setState(() {
                                         _cargando = false;
-                                        _prefs.cedulaMensajero =
-                                            '72245215';
+                                        _prefs.cedulaMensajero = '72245215';
                                         _prefs.logged = true;
-                                        _prefs.usuarioSipost = _cedulaController.text;
+                                        _prefs.usuarioSipost =
+                                            _cedulaController.text;
                                       });
                                       Navigator.pushReplacementNamed(
                                           context, 'menu');

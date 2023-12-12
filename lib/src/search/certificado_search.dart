@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
-import 'package:prueba_de_entrega/src/components/modals.dart';
-import 'package:prueba_de_entrega/src/services/certificado_service.dart';
-//import 'package:prueba_de_entrega/src/services/connection_service.dart';
-import 'package:prueba_de_entrega/src/services/prefs.dart';
-import 'package:prueba_de_entrega/src/services/sqlite_db.dart';
-import 'package:prueba_de_entrega/src/theme/theme.dart';
+import 'package:LIQYAPP/src/components/modals.dart';
+import 'package:LIQYAPP/src/services/certificado_service.dart';
+//import 'package:LIQYAPP/src/services/connection_service.dart';
+import 'package:LIQYAPP/src/services/prefs.dart';
+import 'package:LIQYAPP/src/services/sqlite_db.dart';
+import 'package:LIQYAPP/src/theme/theme.dart';
 
 class CertificadoSearch extends SearchDelegate {
   final List<Certificado> listaCertificados;

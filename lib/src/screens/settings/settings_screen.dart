@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:prueba_de_entrega/src/services/prefs.dart';
-import 'package:prueba_de_entrega/src/theme/theme.dart';
+import 'package:LIQYAPP/src/services/prefs.dart';
+import 'package:LIQYAPP/src/theme/theme.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override

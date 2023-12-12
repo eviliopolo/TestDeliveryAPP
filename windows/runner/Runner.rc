@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "prueba_de_entrega" "\0"
+            VALUE "FileDescription", "LIQYAPP" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "prueba_de_entrega" "\0"
+            VALUE "InternalName", "LIQYAPP" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "prueba_de_entrega.exe" "\0"
-            VALUE "ProductName", "prueba_de_entrega" "\0"
+            VALUE "OriginalFilename", "LIQYAPP.exe" "\0"
+            VALUE "ProductName", "LIQYAPP" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

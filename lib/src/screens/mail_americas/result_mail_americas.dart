@@ -1,8 +1,8 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:prueba_de_entrega/src/provider/data_sipost_provider.dart';
-import 'package:prueba_de_entrega/src/theme/theme.dart';
+import 'package:LIQYAPP/src/provider/data_sipost_provider.dart';
+import 'package:LIQYAPP/src/theme/theme.dart';
 
 class ResultMailAmericasScreen extends StatefulWidget {
   @override

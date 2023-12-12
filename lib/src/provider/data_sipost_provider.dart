@@ -1,8 +1,8 @@
 //import 'package:flutter/foundation.dart';
-import 'package:prueba_de_entrega/src/models/data_sipost_model.dart';
-import 'package:prueba_de_entrega/src/models/sipost_response.dart';
+import 'package:LIQYAPP/src/models/data_sipost_model.dart';
+import 'package:LIQYAPP/src/models/sipost_response.dart';
 import 'package:flutter/material.dart';
-export 'package:prueba_de_entrega/src/models/data_sipost_model.dart';
+export 'package:LIQYAPP/src/models/data_sipost_model.dart';
 
 class DataSipostProvider with ChangeNotifier {
   SipostResponse _sipostResponse = SipostResponse();

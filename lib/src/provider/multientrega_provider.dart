@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:prueba_de_entrega/src/models/certificado_model.dart';
-import 'package:prueba_de_entrega/src/models/edificio_model.dart';
+import 'package:LIQYAPP/src/models/certificado_model.dart';
+import 'package:LIQYAPP/src/models/edificio_model.dart';
 
 class MultiEntregaProvider with ChangeNotifier {
   Edificio _edificio = Edificio();

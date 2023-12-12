@@ -2,18 +2,18 @@ import 'dart:io';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:prueba_de_entrega/src/services/geolocator_service.dart';
+import 'package:LIQYAPP/src/services/geolocator_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
-import 'package:prueba_de_entrega/src/components/loading_overlay.dart';
-import 'package:prueba_de_entrega/src/components/modals.dart';
-import 'package:prueba_de_entrega/src/provider/data_sipost_provider.dart';
-import 'package:prueba_de_entrega/src/services/digital_image_sipost.dart';
-import 'package:prueba_de_entrega/src/services/prefs.dart';
-import 'package:prueba_de_entrega/src/services/scanner_service.dart';
-import 'package:prueba_de_entrega/src/services/sqlite_db.dart';
-import 'package:prueba_de_entrega/src/theme/theme.dart';
+import 'package:LIQYAPP/src/components/loading_overlay.dart';
+import 'package:LIQYAPP/src/components/modals.dart';
+import 'package:LIQYAPP/src/provider/data_sipost_provider.dart';
+import 'package:LIQYAPP/src/services/digital_image_sipost.dart';
+import 'package:LIQYAPP/src/services/prefs.dart';
+import 'package:LIQYAPP/src/services/scanner_service.dart';
+import 'package:LIQYAPP/src/services/sqlite_db.dart';
+import 'package:LIQYAPP/src/theme/theme.dart';
 
 class CertificarScreen extends StatefulWidget {
   @override

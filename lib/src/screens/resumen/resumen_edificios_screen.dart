@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-//import 'package:prueba_de_entrega/src/models/edificio_model.dart';
-import 'package:prueba_de_entrega/src/provider/multientrega_provider.dart';
-import 'package:prueba_de_entrega/src/services/sqlite_db.dart';
-import 'package:prueba_de_entrega/src/theme/theme.dart';
+//import 'package:LIQYAPP/src/models/edificio_model.dart';
+import 'package:LIQYAPP/src/provider/multientrega_provider.dart';
+import 'package:LIQYAPP/src/services/sqlite_db.dart';
+import 'package:LIQYAPP/src/theme/theme.dart';
 
 class ResumenEdificiosScreen extends StatefulWidget {
   @override

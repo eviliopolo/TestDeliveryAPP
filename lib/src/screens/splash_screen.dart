@@ -2,10 +2,10 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:prueba_de_entrega/app_config.dart';
-import 'package:prueba_de_entrega/src/services/geolocator_service.dart';
-import 'package:prueba_de_entrega/src/services/prefs.dart';
-import 'package:prueba_de_entrega/src/theme/theme.dart';
+import 'package:LIQYAPP/app_config.dart';
+import 'package:LIQYAPP/src/services/geolocator_service.dart';
+import 'package:LIQYAPP/src/services/prefs.dart';
+import 'package:LIQYAPP/src/theme/theme.dart';
 //import 'package:geolocator/geolocator.dart';
 
 class SplashScreen extends StatefulWidget {

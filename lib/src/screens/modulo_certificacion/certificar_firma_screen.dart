@@ -6,17 +6,17 @@ import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
-import 'package:prueba_de_entrega/src/components/loading_overlay.dart';
-import 'package:prueba_de_entrega/src/components/modals.dart';
-import 'package:prueba_de_entrega/src/models/sipost_response.dart';
-import 'package:prueba_de_entrega/src/provider/data_sipost_provider.dart';
-import 'package:prueba_de_entrega/src/services/certificado_service.dart';
-//import 'package:prueba_de_entrega/src/services/connection_service.dart';
-import 'package:prueba_de_entrega/src/services/consulta_service.dart';
-import 'package:prueba_de_entrega/src/services/prefs.dart';
-import 'package:prueba_de_entrega/src/services/scanner_service.dart';
-import 'package:prueba_de_entrega/src/services/sqlite_db.dart';
-import 'package:prueba_de_entrega/src/theme/theme.dart';
+import 'package:LIQYAPP/src/components/loading_overlay.dart';
+import 'package:LIQYAPP/src/components/modals.dart';
+import 'package:LIQYAPP/src/models/sipost_response.dart';
+import 'package:LIQYAPP/src/provider/data_sipost_provider.dart';
+import 'package:LIQYAPP/src/services/certificado_service.dart';
+//import 'package:LIQYAPP/src/services/connection_service.dart';
+import 'package:LIQYAPP/src/services/consulta_service.dart';
+import 'package:LIQYAPP/src/services/prefs.dart';
+import 'package:LIQYAPP/src/services/scanner_service.dart';
+import 'package:LIQYAPP/src/services/sqlite_db.dart';
+import 'package:LIQYAPP/src/theme/theme.dart';
 
 class CertificarFirmaScreen extends StatefulWidget {
   @override

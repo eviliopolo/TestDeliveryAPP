@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 //import 'package:get_version/get_version.dart';
 //import 'package:package_info/package_info.dart';
-import 'package:prueba_de_entrega/src/components/modals.dart';
-import 'package:prueba_de_entrega/src/services/prefs.dart';
-import 'package:prueba_de_entrega/src/theme/theme.dart';
+import 'package:LIQYAPP/src/components/modals.dart';
+import 'package:LIQYAPP/src/services/prefs.dart';
+import 'package:LIQYAPP/src/theme/theme.dart';
 
 class CustomDrawer extends StatefulWidget {
   CustomDrawer();

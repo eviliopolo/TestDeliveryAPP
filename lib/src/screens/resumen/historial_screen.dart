@@ -6,16 +6,16 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:prueba_de_entrega/src/components/connection_overlay.dart';
-import 'package:prueba_de_entrega/src/components/loading_overlay.dart';
-import 'package:prueba_de_entrega/src/components/modals.dart';
-import 'package:prueba_de_entrega/src/provider/multientrega_provider.dart';
-import 'package:prueba_de_entrega/src/search/certificado_search.dart';
-import 'package:prueba_de_entrega/src/services/certificado_service.dart';
-import 'package:prueba_de_entrega/src/services/consulta_service.dart';
-import 'package:prueba_de_entrega/src/services/prefs.dart';
-import 'package:prueba_de_entrega/src/services/sqlite_db.dart';
-import 'package:prueba_de_entrega/src/theme/theme.dart';
+import 'package:LIQYAPP/src/components/connection_overlay.dart';
+import 'package:LIQYAPP/src/components/loading_overlay.dart';
+import 'package:LIQYAPP/src/components/modals.dart';
+import 'package:LIQYAPP/src/provider/multientrega_provider.dart';
+import 'package:LIQYAPP/src/search/certificado_search.dart';
+import 'package:LIQYAPP/src/services/certificado_service.dart';
+import 'package:LIQYAPP/src/services/consulta_service.dart';
+import 'package:LIQYAPP/src/services/prefs.dart';
+import 'package:LIQYAPP/src/services/sqlite_db.dart';
+import 'package:LIQYAPP/src/theme/theme.dart';
 
 class HistorialScreen extends StatefulWidget {
   @override

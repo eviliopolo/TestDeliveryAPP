@@ -1,4 +1,4 @@
-import 'package:prueba_de_entrega/src/services/prefs.dart';
+import 'package:LIQYAPP/src/services/prefs.dart';
 
 abstract class Database {
   final PreferenciasUsuario prefs = PreferenciasUsuario();

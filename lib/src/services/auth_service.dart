@@ -1,9 +1,8 @@
 import 'dart:convert';
-// import 'package:prueba_de_entrega/src/services/database.dart';
+// import 'package:LIQYAPP/src/services/database.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-
   Future<dynamic> login(String username, String password) async {
     String url = "https://appcer.4-72.com.co/AppSingle/api/Loginsipost";
 
@@ -24,9 +23,6 @@ class AuthService {
         headers: headers);
     final decodedData = json.decode(resp.body);
     return decodedData;
-
-
-
 
     // final uri = Uri.https(urlSipost, 'api/Loginsipost');
     // final resp = await http.post(uri,

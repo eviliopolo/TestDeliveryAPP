@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:prueba_de_entrega/src/services/database.dart';
+import 'package:LIQYAPP/src/services/database.dart';
 import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 

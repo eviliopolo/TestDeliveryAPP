@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:prueba_de_entrega/app_config.dart';
-import 'package:prueba_de_entrega/src/provider/ingreso_solidario_provider.dart';
-import 'package:prueba_de_entrega/src/provider/multientrega_provider.dart';
-import 'package:prueba_de_entrega/src/routes/routes.dart';
-import 'package:prueba_de_entrega/src/theme/theme.dart';
+import 'package:LIQYAPP/app_config.dart';
+import 'package:LIQYAPP/src/provider/ingreso_solidario_provider.dart';
+import 'package:LIQYAPP/src/provider/multientrega_provider.dart';
+import 'package:LIQYAPP/src/routes/routes.dart';
+import 'package:LIQYAPP/src/theme/theme.dart';
 import 'package:provider/provider.dart';
-import 'package:prueba_de_entrega/src/provider/data_sipost_provider.dart';
-import 'package:prueba_de_entrega/src/services/connection_service.dart';
-import 'package:prueba_de_entrega/src/services/scanner_service.dart';
-import 'package:prueba_de_entrega/src/services/prefs.dart';
+import 'package:LIQYAPP/src/provider/data_sipost_provider.dart';
+import 'package:LIQYAPP/src/services/connection_service.dart';
+import 'package:LIQYAPP/src/services/scanner_service.dart';
+import 'package:LIQYAPP/src/services/prefs.dart';
 
 // State Management
 void main() async {
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: config?.development ?? true,
-          title: 'Prueba de entrega',
+          title: 'LIQYAPP',
           theme: ThemeData(
             primaryColor: blue,
             secondaryHeaderColor: white,

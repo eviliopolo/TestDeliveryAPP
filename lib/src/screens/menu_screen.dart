@@ -8,14 +8,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //import 'package:get_version/get_version.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
-import 'package:prueba_de_entrega/src/components/connection_overlay.dart';
-import 'package:prueba_de_entrega/src/components/custom_drawer.dart';
-import 'package:prueba_de_entrega/src/components/modals.dart';
-import 'package:prueba_de_entrega/src/provider/multientrega_provider.dart';
-import 'package:prueba_de_entrega/src/services/consulta_service.dart';
-import 'package:prueba_de_entrega/src/services/prefs.dart';
-import 'package:prueba_de_entrega/src/services/sqlite_db.dart';
-import 'package:prueba_de_entrega/src/theme/theme.dart';
+import 'package:LIQYAPP/src/components/connection_overlay.dart';
+import 'package:LIQYAPP/src/components/custom_drawer.dart';
+import 'package:LIQYAPP/src/components/modals.dart';
+import 'package:LIQYAPP/src/provider/multientrega_provider.dart';
+import 'package:LIQYAPP/src/services/consulta_service.dart';
+import 'package:LIQYAPP/src/services/prefs.dart';
+import 'package:LIQYAPP/src/services/sqlite_db.dart';
+import 'package:LIQYAPP/src/theme/theme.dart';
 import 'package:store_redirect/store_redirect.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -78,8 +78,7 @@ class _MenuScreenState extends State<MenuScreen> {
           _updated = false;
         });
       }
-    }
-    );
+    });
   }
 
   @override
@@ -300,7 +299,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                 onPressed: () {
                                   StoreRedirect.redirect(
                                       androidAppId:
-                                          "co.com.a472.prueba_de_entrega");
+                                          "co.com.a472.LIQYAPP");
                                 },
                               ),
                             ],

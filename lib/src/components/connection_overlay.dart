@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:prueba_de_entrega/src/theme/theme.dart';
+import 'package:LIQYAPP/src/theme/theme.dart';
 
 class ConnectionOverlay extends StatelessWidget {
   const ConnectionOverlay({

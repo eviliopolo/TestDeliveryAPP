@@ -1,10 +1,10 @@
-import 'package:prueba_de_entrega/src/models/guide.dart';
-import 'package:prueba_de_entrega/src/services/database.dart';
+import 'package:LIQYAPP/src/models/guide.dart';
+import 'package:LIQYAPP/src/services/database.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ConsultaService extends Database {
-  final _baseUrl ='https://appcer.4-72.com.co/AppSingle';
+  final _baseUrl = 'https://appcer.4-72.com.co/AppSingle';
   Future<Map<String, dynamic>> consultarGuia(String guia,
       String cedulaMensajero, bool isMultiple, bool isPorteria) async {
     final uri = Uri.https(url, "api/soporte/ValidarGuia");
@@ -47,38 +47,34 @@ class ConsultaService extends Database {
     final Map<String, dynamic> decodedData = json.decode(resp.body);
     return decodedData;
   }
-////////////////////////////////
-Future<Guide?> searchGuideSipost (String guide) async{
-      try{
-        final response = await http.get(
-          Uri.parse(
-            '$_baseUrl/api/Shipping?barcode=$guide'
-          ),
-          headers: {
-            'Content-Type': 'application/json',
-            'Token': 'Y2FybG9zLmdhbWJvYTpTYW50aWFnbzIwMjArKys='
-            }
-        );
 
-      print (' Response.Status ${response.statusCode} ');
+////////////////////////////////
+  Future<Guide?> searchGuideSipost(String guide) async {
+    try {
+      final response = await http
+          .get(Uri.parse('$_baseUrl/api/Shipping?barcode=$guide'), headers: {
+        'Content-Type': 'application/json',
+        'Token': 'Y2FybG9zLmdhbWJvYTpTYW50aWFnbzIwMjArKys='
+      });
+
+      print(' Response.Status ${response.statusCode} ');
       //print (' Response.Body ${response.body} ');
 
-      switch(response.statusCode){
+      switch (response.statusCode) {
         case 200:
-          print ('Ingresando por el 200');
-          final json = Map<String,dynamic>.from(
-          jsonDecode(response.body),
+          print('Ingresando por el 200');
+          final json = Map<String, dynamic>.from(
+            jsonDecode(response.body),
           );
           Guide guide = Guide.fromJson(json['Shipping']);
-          print (' Guia:  ${guide.codebar}');
-          print (' Cargado a sector:  ${guide.availableForDelivery}');
-          print (' Digitalizado:  ${guide.delivered}');
+          print(' Guia:  ${guide.codebar}');
+          print(' Cargado a sector:  ${guide.availableForDelivery}');
+          print(' Digitalizado:  ${guide.delivered}');
           return guide;
-        default: 
+        default:
           return null;
       }
-    }
-    catch (e){
+    } catch (e) {
       rethrow;
       // if (e is SocketException){
       //   return Either.left(SignInFailure.network);
@@ -87,12 +83,7 @@ Future<Guide?> searchGuideSipost (String guide) async{
     }
   }
 
-///
-
-
-
-
-
+  ///
 
   Future<Map<String, dynamic>> obtenerDatosGuiaMailAmericas(
       String guia, String cedulaMensajero) async {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:prueba_de_entrega/app_config.dart';
-import 'package:prueba_de_entrega/main.dart';
-import 'package:prueba_de_entrega/src/services/prefs.dart';
+import 'package:LIQYAPP/app_config.dart';
+import 'package:LIQYAPP/main.dart';
+import 'package:LIQYAPP/src/services/prefs.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

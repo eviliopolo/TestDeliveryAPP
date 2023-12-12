@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:prueba_de_entrega/src/models/edificio_model.dart';
-export 'package:prueba_de_entrega/src/models/edificio_model.dart';
-import 'package:prueba_de_entrega/src/models/certificado_model.dart';
-export 'package:prueba_de_entrega/src/models/certificado_model.dart';
+import 'package:LIQYAPP/src/models/edificio_model.dart';
+export 'package:LIQYAPP/src/models/edificio_model.dart';
+import 'package:LIQYAPP/src/models/certificado_model.dart';
+export 'package:LIQYAPP/src/models/certificado_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SqliteDB {
