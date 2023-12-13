@@ -168,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       .login(_cedulaController.text,
                                           _passController.text)
                                       .then((resp) {
-                                    if (resp['token'] != null) {
+                                    if (resp != null && resp['token'] != null) {
                                       setState(() {
                                         _cargando = false;
                                         _prefs.cedulaMensajero = '72245215';
