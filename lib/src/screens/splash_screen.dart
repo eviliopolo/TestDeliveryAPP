@@ -53,7 +53,7 @@ class SplashScreenState extends State<SplashScreen> {
         _cargando = false;
       });
 
-      _prefs.apiUrlBase = '5ntacto-dev.azurewebsites.net';
+      _prefs.apiUrlBase = '5ntacto-pro.azurewebsites.net';
 
       if (_prefs.logged) {
         Navigator.pushReplacementNamed(context, 'menu');
