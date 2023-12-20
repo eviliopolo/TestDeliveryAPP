@@ -1,18 +1,17 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:LIQYAPP/src/components/modals.dart';
-import 'package:LIQYAPP/src/models/guide.dart';
 import 'package:LIQYAPP/src/models/sipost_response.dart';
 import 'package:LIQYAPP/src/provider/data_sipost_provider.dart';
 import 'package:LIQYAPP/src/services/consulta_service.dart';
 import 'package:LIQYAPP/src/services/prefs.dart';
 import 'package:LIQYAPP/src/theme/theme.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class CardResultadoSipost extends StatelessWidget {
   final String guiaBarcode;
   final _formKey = GlobalKey<FormState>();
-  CardResultadoSipost(this.guiaBarcode);
+  CardResultadoSipost(this.guiaBarcode, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,20 +47,20 @@ class CardResultadoSipost extends StatelessWidget {
                           letterSpacing: 2.0,
                           fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 12.0),
-                    Divider(),
+                    const SizedBox(height: 12.0),
+                    const Divider(),
                     Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           child: Text(
                             'DATOS DEL REMITENTE',
                             style: TextStyle(fontSize: 12.0, color: blue),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           child: Wrap(
                             direction: Axis.vertical,
@@ -70,14 +69,16 @@ class CardResultadoSipost extends StatelessWidget {
                                 'Nombre completo',
                                 style: TextStyle(fontSize: 12.0, color: grey),
                               ),
-                              Text(
+                              AutoSizeText(
                                 _sipostResponse.names.toString(),
-                                style: TextStyle(fontSize: 12.0),
+                                style: const TextStyle(fontSize: 12.0),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
                               ),
                             ],
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           child: Wrap(
                             direction: Axis.vertical,
@@ -87,13 +88,16 @@ class CardResultadoSipost extends StatelessWidget {
                                 style: TextStyle(fontSize: 12.0, color: grey),
                               ),
                               Text(
-                                _sipostResponse.address!,
-                                style: TextStyle(fontSize: 12.0),
+                                _sipostResponse.address ??
+                                    "Dirección no disponible",
+                                style: const TextStyle(fontSize: 12.0),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(height: 8.0),
+                        const SizedBox(height: 8.0),
                         Form(
                           key: _formKey,
                           child: Visibility(
@@ -105,10 +109,10 @@ class CardResultadoSipost extends StatelessWidget {
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
                                 keyboardType: TextInputType.phone,
-                                style: TextStyle(fontSize: 12.0),
+                                style: const TextStyle(fontSize: 12.0),
                                 decoration: InputDecoration(
                                   isDense: true,
-                                  prefixIcon: Icon(Icons.phone_android),
+                                  prefixIcon: const Icon(Icons.phone_android),
                                   border: OutlineInputBorder(
                                       borderRadius:
                                           BorderRadius.circular(12.0)),
@@ -125,140 +129,7 @@ class CardResultadoSipost extends StatelessWidget {
                                     _sipostResponse.phone = value!),
                           ),
                         ),
-                        SizedBox(height: 16.0),
-                        Visibility(
-                          visible: _sipostResponse.isOtp!,
-                          child: Container(
-                            width: double.infinity,
-                            child: TextButton(
-                              child: Text(
-                                _sipostResponse.isOtpComprobado!
-                                    ? "Continuar"
-                                    : "Enviar OTP",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              onPressed: () {
-                                // 1. Validar si es OTP
-                                if (_sipostResponse.isOtp!) {
-                                  // 2. Valida si el OTP Ya esta Comprobado
-                                  if (_sipostResponse.isOtpComprobado!) {
-                                    _formKey.currentState!.save();
-                                    if (_sipostResponse.phone!.length == 10) {
-                                      Navigator.pushNamed(
-                                          context, "certificar_firma");
-                                    } else {
-                                      showAlert(
-                                          context,
-                                          "Importante",
-                                          "Ingrese un número de celular válido.",
-                                          null,
-                                          null);
-                                    }
-                                  } else {
-                                    // 3. Valida que el campo telefono no esté vacío
-                                    if (_sipostResponse.phone!.length == 10) {
-                                      _formKey.currentState!.save();
-                                      // Enviar OTP
-                                      loading(context);
-                                      _consultaService
-                                          .enviarOTP(
-                                              guiaBarcode,
-                                              _prefs.cedulaMensajero,
-                                              _sipostResponse.phone!)
-                                          .then((resp) {
-                                        Navigator.pop(context);
-                                        if (resp["Response"]) {
-                                          Navigator.pushNamed(context, "otp");
-                                        } else {
-                                          showAlert(
-                                              context,
-                                              "Error al enviar el OTP",
-                                              resp["Message"],
-                                              null,
-                                              null);
-                                        }
-                                      });
-                                    } else {
-                                      showAlert(
-                                          context,
-                                          "Importante",
-                                          "Ingrese un número de celular válido.",
-                                          null,
-                                          null);
-                                    }
-                                  }
-                                }
-                              },
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: _sipostResponse.isFirma! &&
-                              !_sipostResponse.isOtp!,
-                          child: Container(
-                            width: double.infinity,
-                            child: TextButton(
-                              child: Text(
-                                _sipostResponse.isFirmaComprobada!
-                                    ? "Continuar"
-                                    : "Solicitar firma",
-                                style: TextStyle(color: white),
-                              ),
-                              onPressed: () {
-                                // 1. Validar si es Firma
-                                if (_sipostResponse.isFirma!) {
-                                  // 4. Valida si ya esta firmado
-                                  if (_sipostResponse.isFirmaComprobada!) {
-                                    _formKey.currentState!.save();
-                                    if (_sipostResponse.phone!.length == 10) {
-                                      Navigator.pushNamed(
-                                          context, "certificar_firma");
-                                    } else {
-                                      showAlert(
-                                          context,
-                                          "Importante",
-                                          "Ingrese un número de celular valido.",
-                                          null,
-                                          null);
-                                    }
-                                  } else {
-                                    // Valida si es entrega a terceros y que el campo no esté vacio
-                                    if (_sipostResponse.phone!.length == 10) {
-                                      // Envía Link de la firma
-                                      loading(context);
-                                      _consultaService
-                                          .enviarLinkFirma(
-                                              guiaBarcode,
-                                              _prefs.cedulaMensajero,
-                                              _sipostResponse.phone!)
-                                          .then((resp) {
-                                        Navigator.pop(context);
-                                        if (resp["Response"]) {
-                                          Navigator.pushNamed(
-                                              context, "certificar_firma");
-                                        } else {
-                                          showAlert(
-                                              context,
-                                              "Error al enviar Link",
-                                              resp["Message"],
-                                              null,
-                                              null);
-                                        }
-                                      });
-                                    } else {
-                                      showAlert(
-                                          context,
-                                          "Importante",
-                                          "Ingrese un número de celular válido.",
-                                          null,
-                                          null);
-                                    }
-                                  }
-                                }
-                              },
-                            ),
-                          ),
-                        ),
+                        const SizedBox(height: 16.0),
                         Visibility(
                           visible: ((!_sipostResponse.isFirma! &&
                                       !_sipostResponse.isOtp!) &&
@@ -301,23 +172,12 @@ class CardResultadoSipost extends StatelessWidget {
                                       guideNotFound(context);
                                     }
                                   }
-
-                                  // if (1 == 1){
-                                  //   imgDigitalized (context);
-                                  // }
-                                  // else if (_sipostResponse.isFirma!) {
-                                  //     Navigator.pushNamed(
-                                  //     context, "certificar_firma");
-                                  // }
-                                  // else {
-                                  //     Navigator.pushNamed(context, "certificar");
-                                  // }
                                 });
                               },
                             ),
                           ),
                         ),
-                        SizedBox(height: 16.0),
+                        const SizedBox(height: 16.0),
                       ],
                     ),
                   ],

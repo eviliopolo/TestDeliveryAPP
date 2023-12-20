@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:LIQYAPP/src/components/connection_overlay.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -16,15 +17,16 @@ import 'package:LIQYAPP/src/services/sqlite_db.dart';
 import 'package:LIQYAPP/src/theme/theme.dart';
 
 class CertificarScreen extends StatefulWidget {
+  const CertificarScreen({super.key});
+
   @override
-  _CertificarScreenState createState() => _CertificarScreenState();
+  CertificarScreenState createState() => CertificarScreenState();
 }
 
-class _CertificarScreenState extends State<CertificarScreen> {
+class CertificarScreenState extends State<CertificarScreen> {
   File? _foto;
   final _scanService = ScanService();
   final _prefs = PreferenciasUsuario();
-  //final _certificadoService = CertificadoService();
   final _position = GeolocatorService();
   final _digtalImageSipost = DigitalImageSipost();
   bool _internetConnection = true;
@@ -39,7 +41,6 @@ class _CertificarScreenState extends State<CertificarScreen> {
 
   @override
   void initState() {
-    //_getCurrentPosition();
     super.initState();
   }
 
@@ -47,17 +48,19 @@ class _CertificarScreenState extends State<CertificarScreen> {
   Widget build(BuildContext context) {
     DataSipostProvider sipostProvider =
         Provider.of<DataSipostProvider>(context, listen: false);
-    final _connection =
+    final connection =
         Provider.of<InternetConnectionStatus>(context, listen: false);
 
-    if (_connection == InternetConnectionStatus.disconnected) {
+    if (connection == InternetConnectionStatus.disconnected) {
       setState(() => _internetConnection = false);
-    } else if (_connection == InternetConnectionStatus.connected) {
+    } else if (connection == InternetConnectionStatus.connected) {
       setState(() => _internetConnection = true);
     }
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(6, 69, 147, 1),
+        foregroundColor: Colors.white,
         leading: BackButton(
           onPressed: () {
             Navigator.pushReplacementNamed(context, "menu");
@@ -81,9 +84,9 @@ class _CertificarScreenState extends State<CertificarScreen> {
         children: <Widget>[
           Container(
             color: background,
-            constraints: BoxConstraints.expand(),
+            constraints: const BoxConstraints.expand(),
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: <Widget>[
                   Card(
@@ -93,11 +96,11 @@ class _CertificarScreenState extends State<CertificarScreen> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         child: Column(
                           children: <Widget>[
-                            Container(
+                            SizedBox(
                               width: double.infinity,
                               child: Column(
                                 children: <Widget>[
@@ -114,32 +117,32 @@ class _CertificarScreenState extends State<CertificarScreen> {
                                         letterSpacing: 2.0,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(height: 12.0),
-                                  Divider(),
+                                  const SizedBox(height: 12.0),
+                                  const Divider(),
                                   Row(
                                     children: <Widget>[
                                       Container(
-                                        height: 80.0,
+                                        height: 100.0,
                                         decoration: BoxDecoration(
                                             border: Border.all(),
                                             borderRadius:
                                                 BorderRadius.circular(12.0)),
                                         child: AspectRatio(
-                                            aspectRatio: 4 / 3,
+                                            aspectRatio: 5 / 3,
                                             child: _foto != null
                                                 ? _mostrarFoto()
-                                                : Icon(Icons.camera_alt)),
+                                                : const Icon(Icons.camera_alt)),
                                       ),
-                                      SizedBox(width: 8.0),
+                                      const SizedBox(width: 8.0),
                                       Expanded(
                                         child: MaterialButton(
                                           elevation: 0.0,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(8.0)),
-                                          color: Color.fromRGBO(
+                                          color: const Color.fromRGBO(
                                               244, 244, 244, 1.0),
-                                          child: Text("Toma una foto"),
+                                          child: const Text("Toma una foto"),
                                           onPressed: () {
                                             _tomarFoto();
                                           },
@@ -147,7 +150,7 @@ class _CertificarScreenState extends State<CertificarScreen> {
                                       )
                                     ],
                                   ),
-                                  SizedBox(height: 12.0),
+                                  const SizedBox(height: 12.0),
                                   Form(
                                     key: _formKey,
                                     child: Column(
@@ -155,20 +158,21 @@ class _CertificarScreenState extends State<CertificarScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: <Widget>[
-                                        Container(
+                                        const SizedBox(
                                           width: double.infinity,
-                                          child: const Text(
+                                          child: Text(
                                             'DATOS DE LA PERSONA QUE RECIBE',
                                             style: TextStyle(
                                                 fontSize: 12.0,
                                                 fontFamily: "Custom"),
                                           ),
                                         ),
-                                        SizedBox(height: 6.0),
+                                        const SizedBox(height: 6.0),
                                         TextFormField(
                                           readOnly: sipostProvider
                                               .sipostResponse.isEntregaTercero!,
-                                          style: TextStyle(fontSize: 12.0),
+                                          style:
+                                              const TextStyle(fontSize: 12.0),
                                           decoration: InputDecoration(
                                             labelText:
                                                 "Nombre completo de quíen recibe",
@@ -189,12 +193,13 @@ class _CertificarScreenState extends State<CertificarScreen> {
                                             return null;
                                           },
                                         ),
-                                        SizedBox(height: 6.0),
+                                        const SizedBox(height: 6.0),
                                         Visibility(
                                           visible: !sipostProvider
                                               .sipostResponse.isPorteria!,
                                           child: TextFormField(
-                                            style: TextStyle(fontSize: 12.0),
+                                            style:
+                                                const TextStyle(fontSize: 12.0),
                                             keyboardType: TextInputType.number,
                                             decoration: InputDecoration(
                                               labelText:
@@ -224,7 +229,7 @@ class _CertificarScreenState extends State<CertificarScreen> {
                                             },
                                           ),
                                         ),
-                                        SizedBox(height: 6.0),
+                                        const SizedBox(height: 6.0),
                                         Visibility(
                                           visible: !sipostProvider
                                               .sipostResponse.isPorteria!,
@@ -232,7 +237,8 @@ class _CertificarScreenState extends State<CertificarScreen> {
                                               readOnly: !sipostProvider
                                                   .sipostResponse
                                                   .isEntregaTercero!,
-                                              style: TextStyle(fontSize: 12.0),
+                                              style: const TextStyle(
+                                                  fontSize: 12.0),
                                               keyboardType:
                                                   TextInputType.number,
                                               decoration: InputDecoration(
@@ -256,7 +262,7 @@ class _CertificarScreenState extends State<CertificarScreen> {
                                                 return null;
                                               }),
                                         ),
-                                        SizedBox(height: 6.0),
+                                        const SizedBox(height: 6.0),
                                         TextFormField(
                                           maxLines: 3,
                                           controller: _observacionesController,
@@ -270,12 +276,13 @@ class _CertificarScreenState extends State<CertificarScreen> {
                                                   BorderRadius.circular(12.0),
                                             ),
                                           ),
-                                          style: TextStyle(fontSize: 12.0),
+                                          style:
+                                              const TextStyle(fontSize: 12.0),
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: double.infinity,
                                           child: TextButton.icon(
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.cloud_upload,
                                               size: 20.0,
                                             ),
@@ -283,7 +290,7 @@ class _CertificarScreenState extends State<CertificarScreen> {
                                             /*shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(8.0)),*/
-                                            label: Text(
+                                            label: const Text(
                                               "Certificar entrega",
                                             ),
                                             onPressed: () {
@@ -306,9 +313,12 @@ class _CertificarScreenState extends State<CertificarScreen> {
               ),
             ),
           ),
+          ConnectionOverlay(
+            internetConnection: !_internetConnection,
+          ),
           Visibility(
             visible: _certificando,
-            child: LoadingOverlay(
+            child: const LoadingOverlay(
               title: "Certificando entrega",
               content: "Por favor espere",
             ),
@@ -342,15 +352,13 @@ class _CertificarScreenState extends State<CertificarScreen> {
     if (_foto != null) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(12.0),
-        child: Container(
-          child: Image.file(
-            _foto!,
-            fit: BoxFit.cover,
-          ),
+        child: Image.file(
+          _foto!,
+          fit: BoxFit.cover,
         ),
       );
     }
-    return Icon(Icons.edit);
+    return const Icon(Icons.edit);
   }
 
   certificar(DataSipostProvider sipostProvider) async {
@@ -393,7 +401,7 @@ class _CertificarScreenState extends State<CertificarScreen> {
                     'Guía Digitalizada',
                     "Entregada",
                     TextButton(
-                      child: Text('OK'),
+                      child: const Text('OK'),
                       onPressed: () {
                         //sipostProvider.sipostResponse = SipostResponse();
                         //sipostProvider.barcode = sipostProvider.barcode;
@@ -427,7 +435,7 @@ class _CertificarScreenState extends State<CertificarScreen> {
                 'MENSAJE',
                 resp["Message"],
                 TextButton(
-                  child: Text('OK'),
+                  child: const Text('OK'),
                   onPressed: () {
                     //sipostProvider.sipostResponse = new SipostResponse();
                     //sipostProvider.barcode = "";
@@ -439,7 +447,7 @@ class _CertificarScreenState extends State<CertificarScreen> {
             }
           }).catchError((error) {
             setState(() => _certificando = false);
-          }).timeout(Duration(seconds: 180), onTimeout: () {
+          }).timeout(const Duration(seconds: 180), onTimeout: () {
             timeoutPopUp(context);
           });
         } else {
@@ -452,7 +460,7 @@ class _CertificarScreenState extends State<CertificarScreen> {
 
         if (read) {
           // Cuando no hay internet
-          Certificado _certificado = new Certificado()
+          Certificado certificado = Certificado()
             ..hasFoto = _foto != null ? 1 : 0
             ..cargada = 0
             ..imagenPath = _foto != null ? _foto!.path : ""
@@ -469,7 +477,7 @@ class _CertificarScreenState extends State<CertificarScreen> {
             ..cedulaMensajero = _prefs.cedulaMensajero
             ..isMultiple = 0;
 
-          await SqliteDB.db.crearCertificado(_certificado);
+          await SqliteDB.db.crearCertificado(certificado);
           setState(() => _certificando = false);
           Navigator.pushReplacementNamed(context, 'menu');
         }

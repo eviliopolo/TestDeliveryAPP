@@ -57,6 +57,8 @@ class _MultiScanScreenState extends State<MultiScanScreen> {
       child: Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
+          backgroundColor: const Color.fromRGBO(6, 69, 147, 1),
+          foregroundColor: Colors.white,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () async {

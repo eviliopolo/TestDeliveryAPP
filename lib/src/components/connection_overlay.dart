@@ -5,10 +5,9 @@ import 'package:LIQYAPP/src/theme/theme.dart';
 
 class ConnectionOverlay extends StatelessWidget {
   const ConnectionOverlay({
-    Key? key,
+    super.key,
     @required bool? internetConnection,
-  })  : _internetConnection = internetConnection,
-        super(key: key);
+  }) : _internetConnection = internetConnection;
 
   final bool? _internetConnection;
 
@@ -19,8 +18,8 @@ class ConnectionOverlay extends StatelessWidget {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
         child: Container(
-          constraints: BoxConstraints.expand(),
-          padding: EdgeInsets.all(16.0),
+          constraints: const BoxConstraints.expand(),
+          padding: const EdgeInsets.all(16.0),
           color: Colors.white60,
           child: Center(
             child: Column(

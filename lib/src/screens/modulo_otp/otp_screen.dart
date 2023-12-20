@@ -51,6 +51,8 @@ class _OTPValidateScreenState extends State<OTPValidateScreen> {
 
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: const Color.fromRGBO(6, 69, 147, 1),
+          foregroundColor: Colors.white,
           title: Wrap(
             direction: Axis.vertical,
             children: <Widget>[

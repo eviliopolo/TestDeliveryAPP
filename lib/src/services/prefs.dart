@@ -18,7 +18,8 @@ class PreferenciasUsuario {
 
   // URL BASE
   String get apiUrlBase {
-    return _prefs.getString('apiUrlBase') ?? "5ntacto-pro.azurewebsites.net";
+    return _prefs.getString('apiUrlBase') ?? "5ntacto-dev.azurewebsites.net";
+    //return _prefs.getString('apiUrlBase') ?? "5ntacto-pro.azurewebsites.net";
   }
 
   set apiUrlBase(String url) {

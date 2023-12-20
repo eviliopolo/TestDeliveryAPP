@@ -77,6 +77,8 @@ class _CertificarFirmaScreenState extends State<CertificarFirmaScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(6, 69, 147, 1),
+        foregroundColor: Colors.white,
         leading: BackButton(
           onPressed: () {
             Navigator.pushReplacementNamed(context, "menu");
@@ -100,9 +102,9 @@ class _CertificarFirmaScreenState extends State<CertificarFirmaScreen> {
         children: <Widget>[
           Container(
             color: background,
-            constraints: BoxConstraints.expand(),
+            constraints: const BoxConstraints.expand(),
             child: SingleChildScrollView(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: <Widget>[
                     Card(
@@ -133,8 +135,8 @@ class _CertificarFirmaScreenState extends State<CertificarFirmaScreen> {
                                           letterSpacing: 2.0,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 12.0),
-                                    Divider(),
+                                    const SizedBox(height: 12.0),
+                                    const Divider(),
                                     Row(
                                       children: <Widget>[
                                         Container(
@@ -388,7 +390,7 @@ class _CertificarFirmaScreenState extends State<CertificarFirmaScreen> {
                         );
                       });
                     }
-                    return LoadingOverlay(
+                    return const LoadingOverlay(
                       title: "Comprobando la firma del cliente",
                       content: "Por favor espere",
                     );
@@ -401,7 +403,7 @@ class _CertificarFirmaScreenState extends State<CertificarFirmaScreen> {
           ),
           Visibility(
             visible: _certificando,
-            child: LoadingOverlay(
+            child: const LoadingOverlay(
               title: "Certificando entrega",
               content: "Por favor espere",
             ),

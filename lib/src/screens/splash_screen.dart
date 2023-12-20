@@ -2,7 +2,6 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:LIQYAPP/app_config.dart';
 import 'package:LIQYAPP/src/services/geolocator_service.dart';
 import 'package:LIQYAPP/src/services/prefs.dart';
 import 'package:LIQYAPP/src/theme/theme.dart';
@@ -36,7 +35,7 @@ class SplashScreenState extends State<SplashScreen> {
             return AlertDialog(
               title: Text('GPS Desactivado'),
               content: Text(
-                  '5nTacto requiere el uso del GPS para funcionar correctamente.'),
+                  'Se requiere el uso del GPS para funcionar correctamente.'),
               actions: <Widget>[
                 TextButton(
                   child: Text('ACTIVAR GPS'),
@@ -53,7 +52,8 @@ class SplashScreenState extends State<SplashScreen> {
         _cargando = false;
       });
 
-      _prefs.apiUrlBase = '5ntacto-pro.azurewebsites.net';
+      _prefs.apiUrlBase = '5ntacto-dev.azurewebsites.net';
+      //_prefs.apiUrlBase = '5ntacto-pro.azurewebsites.net';
 
       if (_prefs.logged) {
         Navigator.pushReplacementNamed(context, 'menu');
@@ -95,11 +95,7 @@ class SplashScreenState extends State<SplashScreen> {
                 ),
                 SvgPicture.asset(
                   'assets/images/logo_spn_white.svg',
-
-                  // width: MediaQuery.of(context).size.width * 0.8,
-
                   fit: BoxFit.contain,
-
                   width: MediaQuery.of(context).size.width * 0.8,
                 ),
                 const SizedBox(height: 20.0),
@@ -113,7 +109,7 @@ class SplashScreenState extends State<SplashScreen> {
               children: [
                 Expanded(child: Container()),
                 SvgPicture.asset(
-                  'assets/images/logo_5nTacto.svg',
+                  'assets/icons/logo-4-72.svg',
                   width: MediaQuery.of(context).size.width * 0.3,
                 ),
                 Visibility(

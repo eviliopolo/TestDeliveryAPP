@@ -101,7 +101,9 @@ class _CertificarISScreenState extends State<CertificarISScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Wrap(
+        backgroundColor: const Color.fromRGBO(6, 69, 147, 1),
+        foregroundColor: Colors.white,
+        title: const Wrap(
           direction: Axis.vertical,
           children: <Widget>[
             Text(

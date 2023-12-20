@@ -5,6 +5,7 @@
 import FlutterMacOS
 import Foundation
 
+import advance_pdf_viewer2
 import file_selector_macos
 import geolocator_apple
 import location
@@ -15,6 +16,7 @@ import speech_to_text_macos
 import sqflite
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
+  FlutterPluginPdfViewerPlugin.register(with: registry.registrar(forPlugin: "FlutterPluginPdfViewerPlugin"))
   FileSelectorPlugin.register(with: registry.registrar(forPlugin: "FileSelectorPlugin"))
   GeolocatorPlugin.register(with: registry.registrar(forPlugin: "GeolocatorPlugin"))
   LocationPlugin.register(with: registry.registrar(forPlugin: "LocationPlugin"))

@@ -28,29 +28,23 @@ class _CustomDrawerState extends State<CustomDrawer> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 40.0,
               ),
 
               //_historialEntregas(),
-
               // _resumenMultientregas(),
-
               _configuracion(),
-
               _cerrarSesion(),
-
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Divider(
                   color: blue,
                 ),
               ),
 
               _ayudaSoporte(),
-
               _acercaDe(),
-
               /*
               FutureBuilder<PackageInfo>(
                 future: PackageInfo.fromPlatform(),
@@ -63,8 +57,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 },
               ),
               */
-
-              SizedBox(
+              const SizedBox(
                 height: 50.0,
               ),
             ],
@@ -75,7 +68,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
   }
 
   /*
-
   Widget _historialEntregas() {
     return ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 16.0),

@@ -39,6 +39,8 @@ class _ResumenEntregaEdificioScreenState
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(6, 69, 147, 1),
+        foregroundColor: Colors.white,
         title: Wrap(
           direction: Axis.vertical,
           children: <Widget>[

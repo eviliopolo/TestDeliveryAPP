@@ -19,6 +19,8 @@ class _ResultMailAmericasScreenState extends State<ResultMailAmericasScreen> {
     final _guiaDataSipost = Provider.of<DataSipostProvider>(context).dataSipost;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(6, 69, 147, 1),
+        foregroundColor: Colors.white,
         title: Wrap(
           direction: Axis.vertical,
           children: <Widget>[

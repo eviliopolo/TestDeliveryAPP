@@ -14,8 +14,8 @@ class DigitalImageSipost {
     String ip,
     String mac,
   ) async {
-    String url = "https://svc1.sipost.co/AppSingle/api/Liquidation";
-    //String url = "https://appcer.4-72.com.co/AppSingle/api/Liquidation";
+    //String url = "https://svc1.sipost.co/AppSingle/api/Liquidation";
+    String url = "https://appcer.4-72.com.co/AppSingle/api/Liquidation";
 
     late String token = "Y2FybG9zLmdhbWJvYTpTYW50aWFnbzIwMjArKys=";
     late Map<String, String> headers;
@@ -44,8 +44,8 @@ class DigitalImageSipost {
 
   Future<dynamic> file_sipost(
       String barcode, File? file, double lat, double lon) async {
-    String url = "https://svc1.sipost.co/AppSingle/api/ImageToPdf";
-    //String url = "https://appcer.4-72.com.co/AppSingle/api/ImageToPdf";
+    //String url = "https://svc1.sipost.co/AppSingle/api/ImageToPdf";
+    String url = "https://appcer.4-72.com.co/AppSingle/api/ImageToPdf";
 
     late String token = "Y2FybG9zLmdhbWJvYTpTYW50aWFnbzIwMjArKys=";
     late Map<String, String> headers;

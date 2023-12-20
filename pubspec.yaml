@@ -38,6 +38,9 @@ dependencies:
   permission_handler: ^11.1.0
   barcode_scan2: ^4.3.0
   pdf: ^3.10.6
+  flutter_launcher_icons: ^0.13.1
+  auto_size_text: ^3.0.0
+  advance_pdf_viewer2: ^2.0.5+1
 
 dev_dependencies:
   flutter_test:
@@ -46,15 +49,20 @@ dev_dependencies:
   
   flutter_lints: ^3.0.0
 
-
-
+flutter_launcher_icons:
+  #  image_path: "assets/images/icon-128x128.png"
+  android: true # can specify file name here e.g. "ic_launcher"
+  ios: true # c
+  image_path_android: "assets/logo/ico_android.png"
+  image_path_ios: "assets/logo/ico_ios.png"
+  adaptive_icon_background: "#184093" # only available for Android 8.0 devices and above
+  adaptive_icon_foreground: "assets/logo/ico_android_adaptative.png" # only available for Android 8.0 devices and above
+  background_color_ios: "#184093"
+  remove_alpha_ios: true
 
 flutter:
-
-  
   uses-material-design: true
 
-  
 # To add assets to your application, add an assets section, like this:
   assets:
    - assets/images/

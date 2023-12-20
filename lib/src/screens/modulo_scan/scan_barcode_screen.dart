@@ -56,6 +56,8 @@ class _ScanBarcodeScreenState extends State<ScanBarcodeScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(6, 69, 147, 1),
+        foregroundColor: Colors.white,
         title: const Wrap(
           direction: Axis.vertical,
           children: <Widget>[

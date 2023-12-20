@@ -1,4 +1,6 @@
 //import 'package:flutter/foundation.dart';
+//import 'dart:js_util';
+
 import 'package:LIQYAPP/src/models/data_sipost_model.dart';
 import 'package:LIQYAPP/src/models/sipost_response.dart';
 import 'package:flutter/material.dart';
@@ -50,5 +52,12 @@ class DataSipostProvider with ChangeNotifier {
   set dataSipost(DataSipost dataSipost) {
     _dataSipost = dataSipost;
     notifyListeners();
+  }
+
+  void clear() {
+    _sipostResponse = SipostResponse();
+    _dataSipost = DataSipost();
+    _guiaBarcode = "";
+    _codigo = 0;
   }
 }

@@ -14,7 +14,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Wrap(
+        backgroundColor: const Color.fromRGBO(6, 69, 147, 1),
+        foregroundColor: Colors.white,
+        title: const Wrap(
           direction: Axis.vertical,
           children: <Widget>[
             Text(
@@ -34,11 +36,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 12.0),
+              const SizedBox(height: 12.0),
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Text(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: const Text(
                   'Configuracion',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -48,7 +51,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: SwitchListTile(
                   dense: true,
                   isThreeLine: true,
-                  title: Text(
+                  title: const Text(
                     'Lector incorporado',
                   ),
                   subtitle: Text('Desactiva el escaneo por cámara.'),
@@ -60,7 +63,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   },
                 ),
               ),
-              Divider(),
+              const Divider(),
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -73,7 +76,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 color: white,
                 child: SwitchListTile(
                   dense: true,
-                  title: Text(
+                  title: const Text(
                     'Entrega Indivídual',
                   ),
                   value: _prefs.individual,

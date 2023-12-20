@@ -67,6 +67,8 @@ class _EdificioScreenState extends State<EdificioScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(6, 69, 147, 1),
+        foregroundColor: Colors.white,
         title: Wrap(
           direction: Axis.vertical,
           children: <Widget>[

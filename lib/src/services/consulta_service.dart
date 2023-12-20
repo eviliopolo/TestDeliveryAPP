@@ -4,8 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ConsultaService extends Database {
-  final _baseUrl = 'https://svc1.sipost.co/AppSingle';
-  //final _baseUrl = 'https://appcer.4-72.com.co/AppSingle';
+  //final _baseUrl = 'https://svc1.sipost.co/AppSingle';
+  final _baseUrl = 'https://appcer.4-72.com.co/AppSingle';
   Future<Map<String, dynamic>> consultarGuia(String guia,
       String cedulaMensajero, bool isMultiple, bool isPorteria) async {
     final uri = Uri.https(url, "api/soporte/ValidarGuia");
@@ -131,6 +131,7 @@ class ConsultaService extends Database {
     return decodedData;
   }
 
+  /*
   Future<Map<String, dynamic>> validarVersion(
     String cedulaMensajero,
     String version,
@@ -145,6 +146,7 @@ class ConsultaService extends Database {
     final Map<String, dynamic> decodedData = json.decode(resp.body);
     return decodedData;
   }
+  */
 
   Future<Map<String, dynamic>> obtenerGuiasCertificadas(
     String cedulaMensajero,

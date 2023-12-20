@@ -1,5 +1,3 @@
-//import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -9,7 +7,6 @@ import 'package:LIQYAPP/src/components/connection_overlay.dart';
 import 'package:LIQYAPP/src/components/loading_overlay.dart';
 import 'package:LIQYAPP/src/models/sipost_response.dart';
 import 'package:LIQYAPP/src/provider/data_sipost_provider.dart';
-//import 'package:LIQYAPP/src/services/connection_service.dart';
 import 'package:LIQYAPP/src/services/consulta_service.dart';
 import 'package:LIQYAPP/src/services/prefs.dart';
 import 'package:LIQYAPP/src/services/scanner_service.dart';
@@ -17,12 +14,11 @@ import 'package:LIQYAPP/src/theme/theme.dart';
 
 class ScanModuleScreen extends StatefulWidget {
   const ScanModuleScreen({super.key});
-
   @override
-  _ScanModuleScreenState createState() => _ScanModuleScreenState();
+  ScanModuleScreenState createState() => ScanModuleScreenState();
 }
 
-class _ScanModuleScreenState extends State<ScanModuleScreen> {
+class ScanModuleScreenState extends State<ScanModuleScreen> {
   final _prefs = PreferenciasUsuario();
 
   final TextEditingController _guiaController = TextEditingController();
@@ -33,6 +29,11 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
   @override
   void initState() {
     super.initState();
+    _guiaController.clear();
+    final sipostProvider =
+        Provider.of<DataSipostProvider>(context, listen: false);
+    sipostProvider.clear();
+    setState(() {});
   }
 
   @override
@@ -42,19 +43,22 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _sipostProvider =
+    final sipostProvider =
         Provider.of<DataSipostProvider>(context, listen: false);
-    final _scanService = Provider.of<ScanService>(context, listen: false);
 
-    final _connection = Provider.of<InternetConnectionStatus>(context);
-    if (_connection == InternetConnectionStatus.disconnected) {
+    final scanService = Provider.of<ScanService>(context, listen: false);
+    final connection = Provider.of<InternetConnectionStatus>(context);
+
+    if (connection == InternetConnectionStatus.disconnected) {
       setState(() => _internetConnection = false);
-    } else if (_connection == InternetConnectionStatus.connected) {
+    } else if (connection == InternetConnectionStatus.connected) {
       setState(() => _internetConnection = true);
     }
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(6, 69, 147, 1),
+        foregroundColor: Colors.white,
         title: const Wrap(
           direction: Axis.vertical,
           children: <Widget>[
@@ -77,9 +81,9 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
               children: <Widget>[
                 Expanded(
                   child: Container(
-                    child: (_sipostProvider.barcode.length == 13)
+                    child: (sipostProvider.barcode.length == 13)
                         ? FutureBuilder<Map<String, dynamic>>(
-                            future: (_sipostProvider.barcode.length == 13)
+                            future: (sipostProvider.barcode.length == 13)
                                 ? ConsultaService().consultarGuia(
                                     _guiaController.text,
                                     _prefs.cedulaMensajero,
@@ -88,35 +92,45 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
                                 : null,
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
-                                //print("Future response: ${snapshot.data}");
-
                                 SipostResponse sipostResponse =
                                     SipostResponse.fromJson(snapshot.data!);
                                 if (sipostResponse.response!) {
-                                  _sipostProvider.sipostResponse =
+                                  sipostProvider.sipostResponse =
                                       sipostResponse;
                                   _guiaFocus.unfocus();
                                   return SingleChildScrollView(
-                                    padding: EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: CardResultadoSipost(
-                                        _sipostProvider.barcode),
+                                        sipostProvider.barcode),
                                   );
                                 } else {
-                                  return const Center(
+                                  var message = "";
+                                  if (sipostResponse.message!
+                                      .contains('Modelo Invalido')) {
+                                    message = "La guía tiene formato invalido";
+                                  } else if (sipostResponse.message!
+                                      .contains('Multiples')) {
+                                    message =
+                                        "Esta guia no se puede digitalizar";
+                                  } else {
+                                    message = sipostResponse.message!;
+                                  }
+
+                                  return Center(
                                     child: SingleChildScrollView(
-                                      padding: EdgeInsets.all(30.0),
+                                      padding: const EdgeInsets.all(30.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: <Widget>[
-                                          Text(
-                                            "Aviso",
+                                          const Text(
+                                            "Importante:",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 18.0,
                                                 fontFamily: "Custom"),
                                           ),
                                           Text(
-                                            'Guía no valida',
+                                            message,
                                             textAlign: TextAlign.center,
                                           ),
                                         ],
@@ -126,7 +140,7 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
                                 }
                               } else {
                                 _guiaFocus.unfocus();
-                                return LoadingOverlay(
+                                return const LoadingOverlay(
                                   title: "Consultando Guia",
                                   content: "Por favor espere",
                                 );
@@ -139,10 +153,10 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  SizedBox(height: 50.0),
+                                  const SizedBox(height: 50.0),
                                   SvgPicture.asset(
                                       "assets/images/scan-icon.svg"),
-                                  SizedBox(height: 8.0),
+                                  const SizedBox(height: 8.0),
                                   const Text("Escanea el número de guía",
                                       style: TextStyle(
                                           fontFamily: "Custom",
@@ -157,11 +171,11 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
                   decoration: BoxDecoration(color: white, boxShadow: [
                     BoxShadow(
                         color: Colors.blueGrey.withOpacity(0.4),
-                        offset: Offset(0.0, -0.0),
+                        offset: const Offset(0.0, -0.0),
                         blurRadius: 5.0)
                   ]),
                   child: ListTile(
-                    contentPadding: EdgeInsets.all(6.0),
+                    contentPadding: const EdgeInsets.all(6.0),
                     selected: true,
                     title: Form(
                       child: TextFormField(
@@ -176,11 +190,11 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
                               borderRadius: BorderRadius.circular(16.0),
                             ),
                             hintText: "NÚMERO DE GUÍA",
-                            suffixIcon: _sipostProvider.barcode.length > 0
+                            suffixIcon: sipostProvider.barcode.isNotEmpty
                                 ? IconButton(
-                                    icon: Icon(Icons.clear),
+                                    icon: const Icon(Icons.clear),
                                     onPressed: () {
-                                      _sipostProvider.barcode = "";
+                                      sipostProvider.barcode = "";
                                       _guiaController.clear();
                                       setState(() {});
                                     },
@@ -189,36 +203,7 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
                         onChanged: (valor) async {
                           if (valor.length == 13) {
                             _isPorteria = true;
-
-                            // await showDialog(
-                            //   context: context,
-                            //   barrierDismissible: false,
-                            //   builder: (context) {
-                            //     return AlertDialog(
-                            //       title: const Text(
-                            //         //"¿Entrega en Portería?",
-                            //         "4-72",
-                            //         style: TextStyle(fontFamily: "Bold"),
-                            //       ),
-                            //       content: const Text("Iniciar proceso de entrega"),
-                            //       actions: <Widget>[
-                            //         TextButton(
-                            //           child: const Text("Aceptar"),
-                            //           onPressed: () {
-                            //             Navigator.pop(context, true);
-                            //           },
-                            //         ),
-                            //         // TextButton(
-                            //         //   child: Text("NO"),
-                            //         //   onPressed: () {
-                            //         //     Navigator.pop(context, true);
-                            //         //   },
-                            //         // ),
-                            //       ],
-                            //     );
-                            //   },
-                            // );
-                            setState(() => _sipostProvider.barcode = valor);
+                            setState(() => sipostProvider.barcode = valor);
                           }
                         },
                       ),
@@ -228,38 +213,10 @@ class _ScanModuleScreenState extends State<ScanModuleScreen> {
                         Icons.photo_camera,
                       ),
                       onPressed: () async {
-                        await _scanService.scanBarcode();
+                        await scanService.scanBarcode();
                         _isPorteria = true;
-                        // _isPorteria = await showDialog(
-                        //   context: context,
-                        //   barrierDismissible: false,
-                        //   builder: (context) {
-                        //     return AlertDialog(
-                        //       title: Text(
-                        //         //"¿Entrega en Portería?",
-                        //         "¿Desea continuar?",
-                        //         style: TextStyle(fontFamily: "Bold"),
-                        //       ),
-                        //       content: Text("Seleccione una opción"),
-                        //       actions: <Widget>[
-                        //         TextButton(
-                        //           child: Text("SI"),
-                        //           onPressed: () {
-                        //             Navigator.pop(context, true);
-                        //           },
-                        //         ),
-                        //         TextButton(
-                        //           child: Text("NO"),
-                        //           onPressed: () {
-                        //             Navigator.pop(context, true);
-                        //           },
-                        //         ),
-                        //       ],
-                        //     );
-                        //   },
-                        // );
-                        _sipostProvider.barcode = _scanService.scanResult;
-                        _guiaController.text = _scanService.scanResult;
+                        sipostProvider.barcode = scanService.scanResult;
+                        _guiaController.text = scanService.scanResult;
                         setState(() {});
                       },
                     ),

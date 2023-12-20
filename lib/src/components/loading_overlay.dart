@@ -8,28 +8,28 @@ class LoadingOverlay extends StatefulWidget {
   final String? title;
   final String? content;
 
-  LoadingOverlay({this.title, this.content});
+  const LoadingOverlay({super.key, this.title, this.content});
 
   @override
-  _LoadingOverlayState createState() => _LoadingOverlayState();
+  LoadingOverlayState createState() => LoadingOverlayState();
 }
 
-class _LoadingOverlayState extends State<LoadingOverlay>
+class LoadingOverlayState extends State<LoadingOverlay>
     with SingleTickerProviderStateMixin {
   AnimationController? _controller;
   late Animation<double> scale1, scale2, scale3;
 
   @override
   void initState() {
-    _controller = new AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1000))
+    _controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 1000))
       ..repeat();
 
-    scale1 = new TestTween(begin: 0.9, end: 1.1, delay: 0.0)
+    scale1 = TestTween(begin: 0.9, end: 1.1, delay: 0.0)
         .animate(CurvedAnimation(parent: _controller!, curve: Curves.linear));
-    scale2 = new TestTween(begin: 0.9, end: 1.1, delay: 0.33)
+    scale2 = TestTween(begin: 0.9, end: 1.1, delay: 0.33)
         .animate(CurvedAnimation(parent: _controller!, curve: Curves.linear));
-    scale3 = new TestTween(begin: 0.9, end: 1.1, delay: 0.66)
+    scale3 = TestTween(begin: 0.9, end: 1.1, delay: 0.66)
         .animate(CurvedAnimation(parent: _controller!, curve: Curves.linear));
     super.initState();
   }
@@ -88,14 +88,15 @@ class _LoadingOverlayState extends State<LoadingOverlay>
                       }),
                 ],
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               Text(
                 widget.title ?? '',
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               Text(
                 widget.content ?? '',
-                style: TextStyle(fontSize: 16.0, fontFamily: 'Light'),
+                style: const TextStyle(fontSize: 16.0, fontFamily: 'Light'),
               ),
             ],
           ),
