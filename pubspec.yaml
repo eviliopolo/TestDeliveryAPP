@@ -18,8 +18,7 @@ dependencies:
   geolocator: ^10.1.0
   internet_connection_checker: ^1.0.0+1
   provider: ^6.1.1
-  app_settings: ^5.1.1
-  store_redirect: ^2.0.1
+  app_settings: ^5.1.1  
   barcode_widget: ^2.0.4
   package_info: ^2.0.2
   flutter_svg: ^2.0.9
@@ -41,6 +40,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   auto_size_text: ^3.0.0
   advance_pdf_viewer2: ^2.0.5+1
+  image_cropper: ^5.0.1
 
 dev_dependencies:
   flutter_test:

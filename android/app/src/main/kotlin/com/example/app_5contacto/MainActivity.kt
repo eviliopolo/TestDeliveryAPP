@@ -1,4 +1,4 @@
-package com.example.LIQYAPP
+package com.pruebaentrega.LIQYAPP
 
 import io.flutter.embedding.android.FlutterActivity
 

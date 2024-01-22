@@ -9,12 +9,6 @@ class ConsultaService extends Database {
   Future<Map<String, dynamic>> consultarGuia(String guia,
       String cedulaMensajero, bool isMultiple, bool isPorteria) async {
     final uri = Uri.https(url, "api/soporte/ValidarGuia");
-    print("=====");
-    print(guia);
-    print(cedulaMensajero);
-    print(isMultiple);
-    print(isPorteria);
-
     var resp = await http.post(uri,
         body: {
           "Guia": guia,
@@ -58,19 +52,12 @@ class ConsultaService extends Database {
         'Token': 'Y2FybG9zLmdhbWJvYTpTYW50aWFnbzIwMjArKys='
       });
 
-      print(' Response.Status ${response.statusCode} ');
-      //print (' Response.Body ${response.body} ');
-
       switch (response.statusCode) {
         case 200:
-          print('Ingresando por el 200');
           final json = Map<String, dynamic>.from(
             jsonDecode(response.body),
           );
           Guide guide = Guide.fromJson(json['Shipping']);
-          print(' Guia:  ${guide.codebar}');
-          print(' Cargado a sector:  ${guide.availableForDelivery}');
-          print(' Digitalizado:  ${guide.delivered}');
           return guide;
         default:
           return null;
@@ -167,10 +154,6 @@ class ConsultaService extends Database {
     String cedulaMensajero,
     String celularDestinatario,
   ) async {
-    print(guia);
-    print(cedulaMensajero);
-    print(celularDestinatario);
-
     final uri = Uri.https(url, 'api/soporte/EnviarLinkFirma');
     final resp = await http.post(uri,
         body: {
@@ -188,10 +171,6 @@ class ConsultaService extends Database {
     String cedulaMensajero,
     String codigo,
   ) async {
-    print(guia);
-    print(cedulaMensajero);
-    print(codigo);
-
     final uri = Uri.https(url, 'api/soporte/ComprobarEsGuiaFirmada');
     final resp = await http.post(uri,
         body: {

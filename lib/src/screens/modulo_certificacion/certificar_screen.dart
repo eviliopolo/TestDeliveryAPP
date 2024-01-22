@@ -15,6 +15,7 @@ import 'package:LIQYAPP/src/services/prefs.dart';
 import 'package:LIQYAPP/src/services/scanner_service.dart';
 import 'package:LIQYAPP/src/services/sqlite_db.dart';
 import 'package:LIQYAPP/src/theme/theme.dart';
+import 'package:path_provider/path_provider.dart';
 
 class CertificarScreen extends StatefulWidget {
   const CertificarScreen({super.key});
@@ -33,6 +34,7 @@ class CertificarScreenState extends State<CertificarScreen> {
   bool _certificando = false;
   double? _lat;
   double? _lng;
+  String? image;
 
   final TextEditingController _observacionesController =
       TextEditingController();
@@ -45,11 +47,16 @@ class CertificarScreenState extends State<CertificarScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     DataSipostProvider sipostProvider =
         Provider.of<DataSipostProvider>(context, listen: false);
-    final connection =
-        Provider.of<InternetConnectionStatus>(context, listen: false);
+
+    final connection = Provider.of<InternetConnectionStatus>(context);
 
     if (connection == InternetConnectionStatus.disconnected) {
       setState(() => _internetConnection = false);
@@ -170,7 +177,9 @@ class CertificarScreenState extends State<CertificarScreen> {
                                         const SizedBox(height: 6.0),
                                         TextFormField(
                                           readOnly: sipostProvider
-                                              .sipostResponse.isEntregaTercero!,
+                                                  .sipostResponse
+                                                  .isEntregaTercero ??
+                                              true,
                                           style:
                                               const TextStyle(fontSize: 12.0),
                                           decoration: InputDecoration(
@@ -192,75 +201,6 @@ class CertificarScreenState extends State<CertificarScreen> {
                                             }
                                             return null;
                                           },
-                                        ),
-                                        const SizedBox(height: 6.0),
-                                        Visibility(
-                                          visible: !sipostProvider
-                                              .sipostResponse.isPorteria!,
-                                          child: TextFormField(
-                                            style:
-                                                const TextStyle(fontSize: 12.0),
-                                            keyboardType: TextInputType.number,
-                                            decoration: InputDecoration(
-                                              labelText:
-                                                  "Número cedula de quien recibe",
-                                              isDense: true,
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(12.0),
-                                              ),
-                                            ),
-                                            initialValue: sipostProvider
-                                                        .sipostResponse
-                                                        .identification ==
-                                                    null
-                                                ? ""
-                                                : sipostProvider.sipostResponse
-                                                    .identification
-                                                    .toString(),
-                                            onSaved: (value) => sipostProvider
-                                                .sipostResponse
-                                                .identification = value,
-                                            validator: (valor) {
-                                              if (valor!.isEmpty) {
-                                                return "Ingrese la cédula de quíen recibe.";
-                                              }
-                                              return null;
-                                            },
-                                          ),
-                                        ),
-                                        const SizedBox(height: 6.0),
-                                        Visibility(
-                                          visible: !sipostProvider
-                                              .sipostResponse.isPorteria!,
-                                          child: TextFormField(
-                                              readOnly: !sipostProvider
-                                                  .sipostResponse
-                                                  .isEntregaTercero!,
-                                              style: const TextStyle(
-                                                  fontSize: 12.0),
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              decoration: InputDecoration(
-                                                  labelText:
-                                                      "Número celular de quíen recibe",
-                                                  isDense: true,
-                                                  border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0))),
-                                              initialValue: sipostProvider
-                                                  .sipostResponse.phone
-                                                  .toString(),
-                                              onSaved: (value) => sipostProvider
-                                                  .sipostResponse.phone = value,
-                                              validator: (valor) {
-                                                if (valor!.isEmpty ||
-                                                    valor.length != 10) {
-                                                  return "Ingrese un número celular válido.";
-                                                }
-                                                return null;
-                                              }),
                                         ),
                                         const SizedBox(height: 6.0),
                                         TextFormField(
@@ -333,15 +273,20 @@ class CertificarScreenState extends State<CertificarScreen> {
   }
 
   _procesarImagen(ImageSource origen) async {
-    final XFile? filePicked = await ImagePicker().pickImage(
-      source: origen,
-      imageQuality: 100,
-      maxWidth: MediaQuery.of(context).size.width,
-      maxHeight: MediaQuery.of(context).size.height,
-    );
-
+    final XFile? filePicked = await ImagePicker().pickImage(source: origen);
     if (filePicked != null) {
       _foto = File(filePicked.path);
+
+      // Obtener el directorio de la aplicación
+      final appDir = await getApplicationDocumentsDirectory();
+      // Crear el directorio si no existe
+      final targetDir = Directory('${appDir.path}/testDir');
+      if (!(await targetDir.exists())) {
+        await targetDir.create(recursive: true);
+      }
+      // Copiar el archivo al directorio destino
+      final savedImage = await _foto!.copy('${targetDir.path}/test2.jpg');
+      setState(() => image = savedImage.path);
     }
     setState(() {});
   }
@@ -369,8 +314,6 @@ class CertificarScreenState extends State<CertificarScreen> {
 
         /* computo latitud longitud */
         Position position = await _position.determinePosition();
-        print(position.latitude);
-        print(position.longitude);
         setState(() {
           _lat = position.latitude;
           _lng = position.longitude;
@@ -392,7 +335,7 @@ class CertificarScreenState extends State<CertificarScreen> {
             if (resp['Message'] == 'Exitoso') {
               //setState(() => _certificando = false);
               _digtalImageSipost
-                  .file_sipost(sipostProvider.barcode, _foto, _lat!, _lng!)
+                  .file_sipost(sipostProvider.barcode, image, _lat!, _lng!)
                   .then((resp) async {
                 if (resp["Message"] == "Exitoso") {
                   setState(() => _certificando = false);
@@ -403,8 +346,10 @@ class CertificarScreenState extends State<CertificarScreen> {
                     TextButton(
                       child: const Text('OK'),
                       onPressed: () {
-                        //sipostProvider.sipostResponse = SipostResponse();
-                        //sipostProvider.barcode = sipostProvider.barcode;
+                        sipostProvider.sipostResponse =
+                            DataSipostProvider().sipostResponse;
+                        sipostProvider.barcode = sipostProvider.barcode;
+                        setState(() {});
                         Navigator.popAndPushNamed(context, 'menu');
                       },
                     ),
@@ -417,10 +362,12 @@ class CertificarScreenState extends State<CertificarScreen> {
                     'MENSAJE',
                     resp["Message"],
                     TextButton(
-                      child: Text('OK'),
+                      child: const Text('OK'),
                       onPressed: () {
-                        //sipostProvider.sipostResponse = new SipostResponse();
-                        // sipostProvider.barcode = "";
+                        sipostProvider.sipostResponse =
+                            DataSipostProvider().sipostResponse;
+                        sipostProvider.barcode = sipostProvider.barcode;
+                        setState(() {});
                         Navigator.popAndPushNamed(context, 'menu');
                       },
                     ),
@@ -437,8 +384,10 @@ class CertificarScreenState extends State<CertificarScreen> {
                 TextButton(
                   child: const Text('OK'),
                   onPressed: () {
-                    //sipostProvider.sipostResponse = new SipostResponse();
-                    //sipostProvider.barcode = "";
+                    sipostProvider.sipostResponse =
+                        DataSipostProvider().sipostResponse;
+                    sipostProvider.barcode = sipostProvider.barcode;
+                    setState(() {});
                     Navigator.popAndPushNamed(context, 'menu');
                   },
                 ),

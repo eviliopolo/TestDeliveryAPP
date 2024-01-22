@@ -341,12 +341,6 @@ class _CertificarFirmaScreenState extends State<CertificarFirmaScreen> {
             child: StreamBuilder<dynamic>(
               stream: _scanService.timer,
               builder: (context, snapshot) {
-                print("=======");
-                print(sipostProvider.sipostResponse.isFirmaComprobada);
-                print(sipostProvider.sipostResponse.isPorteria);
-                print(sipostProvider.sipostResponse.isOtp);
-                print(sipostProvider.sipostResponse.isFirma);
-                print("=======");
                 if (snapshot.hasData) {
                   if (sipostProvider.sipostResponse.isPorteria!) {
                     _scanService.cancel();
@@ -358,15 +352,12 @@ class _CertificarFirmaScreenState extends State<CertificarFirmaScreen> {
                     // CONSULTA CADA 10 SEGUNDOS SI LA GUÍA YA ESTÁ FIRMADA
 
                     if (snapshot.data! % 10 == 0) {
-                      print("Multiplo de 10");
-
                       _consultaService
                           .comprobarGuiaFirma(
                               sipostProvider.barcode,
                               _prefs.cedulaMensajero,
                               sipostProvider.codigo.toString())
                           .then((resp) {
-                        print("comprobación de guia: $resp");
                         if (resp["Response"]) {
                           _scanService.cancel();
                           sipostProvider.sipostResponse.isFirmaComprobada =

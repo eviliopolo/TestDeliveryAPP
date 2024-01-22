@@ -20,7 +20,6 @@ class ScanModuleScreen extends StatefulWidget {
 
 class ScanModuleScreenState extends State<ScanModuleScreen> {
   final _prefs = PreferenciasUsuario();
-
   final TextEditingController _guiaController = TextEditingController();
   final FocusNode _guiaFocus = FocusNode();
   bool? _isPorteria;

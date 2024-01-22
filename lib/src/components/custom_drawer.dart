@@ -31,7 +31,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
               const SizedBox(
                 height: 40.0,
               ),
-
               //_historialEntregas(),
               // _resumenMultientregas(),
               _configuracion(),
@@ -86,12 +85,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
   Widget _configuracion() {
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
       title: const Text(
         'Configuración',
         style: TextStyle(fontSize: 16.0),
       ),
-      leading: Icon(Icons.settings),
+      leading: const Icon(Icons.settings),
       onTap: () {
         Navigator.pop(context);
 
@@ -107,15 +106,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
         'Cerrar sesión',
         style: TextStyle(fontSize: 16.0),
       ),
-      leading: Icon(Icons.exit_to_app),
+      leading: const Icon(Icons.exit_to_app),
       onTap: () {
         Future.value(true).then((_) {
           setState(() {
             _prefs.logged = false;
 
             _prefs.cedulaMensajero = "";
-
-            Navigator.of(context).pushReplacementNamed('/');
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil('/', (route) => false);
           });
         });
       },
@@ -124,15 +123,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
   Widget _ayudaSoporte() {
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
       title: const Text(
         'Ayuda',
         style: TextStyle(fontSize: 16.0),
       ),
-      leading: Icon(Icons.help_outline),
+      leading: const Icon(Icons.help_outline),
       onTap: () {
         Navigator.pop(context);
-
         showInfo(context);
       },
     );
@@ -140,12 +138,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
   Widget _acercaDe() {
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
       title: const Text(
         'Acerca de',
         style: TextStyle(fontSize: 16.0),
       ),
-      leading: Icon(Icons.info),
+      leading: const Icon(Icons.info),
       onTap: () {
         Navigator.pop(context);
 

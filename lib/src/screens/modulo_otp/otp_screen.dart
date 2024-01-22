@@ -277,7 +277,6 @@ class _OTPValidateScreenState extends State<OTPValidateScreen> {
                                   _prefs.cedulaMensajero,
                                   _sipostProvider.sipostResponse.phone!)
                               .then((resp) {
-                            print(resp);
                             setState(() => _buscando = false);
                             if (resp["Message"] ==
                                 "Codigo enviado exitosamente") {

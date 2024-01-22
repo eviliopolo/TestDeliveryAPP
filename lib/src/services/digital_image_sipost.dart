@@ -2,6 +2,7 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:image/image.dart' as image;
 
 class DigitalImageSipost {
   Future<dynamic> liquidation(
@@ -43,7 +44,7 @@ class DigitalImageSipost {
   }
 
   Future<dynamic> file_sipost(
-      String barcode, File? file, double lat, double lon) async {
+      String barcode, String? file, double lat, double lon) async {
     //String url = "https://svc1.sipost.co/AppSingle/api/ImageToPdf";
     String url = "https://appcer.4-72.com.co/AppSingle/api/ImageToPdf";
 
@@ -55,9 +56,18 @@ class DigitalImageSipost {
       'Token': token
     };
 
-    List<int> imageBytes = await file!.readAsBytes();
-    String base64Image = base64Encode(imageBytes);
+    final bytes = File(file!).readAsBytesSync();
 
+// Comprimir la imagen antes de convertirla a base64
+    final compressedBytes =
+        image.encodeJpg(image.decodeImage(bytes)!, quality: 85);
+
+    Future<String> obtenerBase64Image() async {
+      final String base64Image = base64Encode(compressedBytes);
+      return base64Image;
+    }
+
+    final String base64Image = await obtenerBase64Image();
     final uri = Uri.parse(url);
     final resp = await http.post(uri,
         body: {

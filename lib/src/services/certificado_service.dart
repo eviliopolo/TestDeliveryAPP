@@ -18,20 +18,6 @@ class CertificadoService extends Database {
     String cedulaMensajero,
     bool isMultiple,
   ) async {
-    print("==== CERITIFICAR ===");
-    print(guia);
-    print(nombre);
-    print(cedula);
-    print(telefono);
-    print(latitud);
-    print(longitud);
-    print(urlImagen);
-    print(isPorteria);
-    print(observaciones);
-    print(cedulaMensajero);
-    print(isMultiple);
-    print("====================");
-
     final uri = Uri.https(url, 'api/soporte/SoporteEntregaSinFoto');
     final resp = await http.post(uri,
         body: {
@@ -67,25 +53,10 @@ class CertificadoService extends Database {
     String cedulaMensajero,
     bool isMultiple,
   ) async {
-    print("==== CERITIFICAR CON IMAGEN ===");
-    print(guia);
-    print(nombre);
-    print(cedula);
-    print(telefono);
-    print(latitud);
-    print(longitud);
-    print(urlImagen);
-    print(isPorteria);
-    print(observaciones);
-    print(cedulaMensajero);
-    print(isMultiple);
-    print("====================");
     final uri = Uri.https(url, 'api/soporte/SoporteEntregaConFotov2');
     var soporte = await foto!.readAsBytes();
     img.Image imgTemp = img.decodeImage(soporte)!;
     img.Image resizedImg = img.copyResize(imgTemp, width: 300);
-    print(base64.encode(img.encodeJpg(resizedImg, quality: 100)));
-
     final resp = await http.post(uri,
         body: {
           'Guia': guia.toUpperCase(),

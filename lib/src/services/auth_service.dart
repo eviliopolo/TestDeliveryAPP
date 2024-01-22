@@ -22,10 +22,6 @@ class AuthService {
           'Password': password,
         },
         headers: headers);
-
-    print('Response.Status ${resp.statusCode} ');
-    print(' Response.Body ${resp.body} ');
-
     switch (resp.statusCode) {
       case 200:
         final decodedData = json.decode(resp.body);
@@ -37,15 +33,5 @@ class AuthService {
       default:
         return null;
     }
-
-    // final decodedData = json.decode(resp.body);
-    // return decodedData;
-
-    // final uri = Uri.https(urlSipost, 'api/Loginsipost');
-    // final resp = await http.post(uri,
-    //     body: {'Cedula': username, 'Constraseña': password}, headers: headers);
-
-    // final decodedData = json.decode(resp.body);
-    // return decodedData;
   }
 }

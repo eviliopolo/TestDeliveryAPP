@@ -30,9 +30,9 @@ class ScanService with ChangeNotifier {
         _exception = 'Error desconocido: $error';
       }
     } on FormatException {
-      print('No se pudo obtener el código de barras)');
+      //print('No se pudo obtener el código de barras)');
     } catch (e) {
-      print('Error desconocido: $e');
+      //print('Error desconocido: $e');
     }
   }
 
@@ -45,7 +45,6 @@ class ScanService with ChangeNotifier {
         cancel();
       } else {
         _timeController.sink.add(countDown);
-        print(countDown);
       }
     });
   }
